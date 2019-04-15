@@ -1,8 +1,8 @@
-# R+FGSM-pytorch
-**A pytorch implementation of "[Ensemble Adversarial Training : Attacks and Defences](https://arxiv.org/abs/1705.07204)"**
+# CW-pytorch
+**A pytorch implementation of "[Towards Evaluating the Robustness of Neural Networks](https://arxiv.org/abs/1608.04644)"**
 
 ## Summary
-This code is a pytorch implementation of **R+FGSM**   
+This code is a pytorch implementation of **CW attack**   
 In this code, I used above methods to fool [Inception v3](https://arxiv.org/abs/1512.00567).   
 '[Giant Panda](http://www.image-net.org/)' used for an example.   
 You can add other pictures with a folder with the label name in the 'data/imagenet'.    
@@ -13,14 +13,10 @@ You can add other pictures with a folder with the label name in the 'data/imagen
 * pytorch==1.0.1   
 
 ## Important results not in the code
-- This paper showed that adverarial training with single-step methods admits a degenerate global minimum. At least two substantially different global minima exists. (p.4)
-  - If there is no adversarial examples near the traning examples, then a hypothesis is robust to all infinity norm distance bounded perturbations.
-  - If a model is the approximation method underlying the specific attack, then other attacks are possible.
-- It suggest to use **R+FGSM** (p.5-6)
-  - The **[gradient masking](https://seclab.stanford.edu/AdvML2017/slides/17-09-aro-aml.pdf)** may results adversarial methods can't produce the best adversarial example.
-  - This is caused by the highly curved loss in the vicinity of the data point.
-  - Thus we need a random step in attack methods.
-
-- Ensemble adversarial training is needed(p.7-8)
-  - With pretrained models, we are able to generate variety adversarial examples. And we can use it for adversarial training a new model.
-  - They use "**Pre-trained Models**(Inception v3, IncRes v2, ResNet v2)" to extract adversarial exampels and use it for adversarial training "**Trained model**(Inception v3, IncRes v2)". Finally, test with adversarial examples from "**Holdout Models**(Inception v4, ResNet v1, ResNet v2)"
+- This paper suggested new approach to the adversarial attack.(p.6-7)
+    - Compared 7 new objective functions(*f*) for generating adversarial images.
+    - Used *tanh* for solving box constraints.
+- Three new attack algorithms proposed.(p.9-10)
+    - They are L_2, L_0, L_inf and L_2 is implementd.
+- These attacks made the [defensive distillation](https://arxiv.org/abs/1511.04508) helpless.(p.12-14)
+    - All of new attack methods succeed with 100% success.
